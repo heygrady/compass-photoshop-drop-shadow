@@ -38,7 +38,7 @@
 //--------------------------------
 // Photoshop Drop Shadow
 //--------------------------------
-@mixin photoshop-drop-shadow ($angle: 0, $distance: 0, $spread: 0, $size: 0, $color: #000, $inner: false) {
+@mixin photoshop-drop-shadow ($angle: 0, $distance: 0, $spread: 0, $size: 0, $color: #000) {
   @include box-shadow(photoshop-shadow($angle, $distance, $spread, $size, $color));
 }
 
