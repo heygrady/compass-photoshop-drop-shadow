@@ -1,0 +1,77 @@
+@import "compass/css3/box-shadow";
+@import "compass/css3/text-shadow";
+
+//--------------------------------
+// Photoshop Shadow Function
+//--------------------------------
+@function photoshop-shadow( $angle: 0, $distance: 0, $spread: 0, $size: 0, $color: #000, $inner: false ) {
+  // default to degrees, same as photoshop
+  @if unitless($angle) {
+    $angle: $angle * 1deg;
+  }
+
+  // compass has a bug converting degrees
+  @if unit($angle) ==  'deg' {
+    // convert to radians to avoid issues
+    $angle: ((180 - ($angle/1deg)) * pi() / 180);
+  }
+  //TODO: other angle units, including rad, will cause issues
+
+  // SASS doesn't do percentages cleanly
+  @if not(unitless($spread)) and unit($spread) == '%' {
+    $spread: $spread/1%; // remove the unit
+  }
+
+  $h-shadow: round(cos($angle) * $distance);
+  $v-shadow: round(sin($angle) * $distance);
+  $css-spread: $size * ($spread/100);
+  $blur: $size - $css-spread;
+  $inset: if($inner != false, 'inset', '');
+
+  @return ( $h-shadow $v-shadow $blur $css-spread $color unquote($inset) );
+}
+
+@function photoshop-glow($choke: 0, $size: 0, $color: #fff, $inner: false) {
+  @return photoshop-shadow(0, 0, $choke, $size, $color, $inner);
+}
+
+//--------------------------------
+// Photoshop Drop Shadow
+//--------------------------------
+@mixin photoshop-drop-shadow ($angle: 0, $distance: 0, $spread: 0, $size: 0, $color: #000, $inner: false) {
+  @include box-shadow(photoshop-shadow($angle, $distance, $spread, $size, $color));
+}
+
+//--------------------------------
+// Photoshop Inner Shadow
+//--------------------------------
+@mixin photoshop-inner-shadow ($angle: 0, $distance: 0, $spread: 0, $size: 0, $color: #000) {
+  @include box-shadow(photoshop-shadow($angle, $distance, $spread, $size, $color, true));
+}
+
+//--------------------------------
+// Photoshop Text Shadow
+//--------------------------------
+@mixin photoshop-text-shadow ($angle: 0, $distance: 0, $spread: 0, $size: 0, $color: #000) {
+  // NOTE: $spread has no effect for text shadows
+  $shadow: photoshop-shadow($angle, $distance, $spread, $size, $color, true);
+  @include text-shadow(nth($shadow, 1) nth($shadow, 2) nth($shadow, 3) nth($shadow, 5));
+}
+
+//--------------------------------
+// Photoshop Outer Glow
+//--------------------------------
+@mixin photoshop-outer-glow ($choke: 0, $size: 0, $color: #fff) {
+  // experimantal
+  // noise, technique, source: center, and quality are not supported
+  @include box-shadow(photoshop-glow($choke, $size, $color, false));
+}
+
+//--------------------------------
+// Photoshop Inner Glow
+//--------------------------------
+@mixin photoshop-inner-glow ($choke: 0, $size: 0, $color: #fff) {
+  // experimantal
+  // noise, technique, source: center, and quality are not supported
+  @include box-shadow(photoshop-glow($choke, $size, $color, true));
+}
