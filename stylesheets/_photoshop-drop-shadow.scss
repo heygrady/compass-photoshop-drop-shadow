@@ -10,7 +10,8 @@
     $angle: $angle * 1deg;
   }
 
-  // compass has a bug converting degrees
+  // compass has a bug converting degrees (fixed in Compass 0.12)
+  // https://github.com/chriseppstein/compass/pull/666
   @if unit($angle) ==  'deg' {
     // convert to radians to avoid issues
     $angle: ((180 - ($angle/1deg)) * pi() / 180);
@@ -19,7 +20,11 @@
 
   // SASS doesn't do percentages cleanly
   @if not(unitless($spread)) and unit($spread) == '%' {
-    $spread: $spread/1%; // remove the unit
+    // remove the percentage unit
+    $spread: $spread/1%;
+  } @else if $spread < 0 {
+    // correct for passing the spread as a decimal
+    $spread: $spread * 100;
   }
 
   $h-shadow: round(cos($angle) * $distance);
@@ -29,6 +34,11 @@
   $inset: if($inner != false, 'inset', '');
 
   @return ( $h-shadow $v-shadow $blur $css-spread $color unquote($inset) );
+}
+
+@function photoshop-text-shadow( $angle: 0, $distance: 0, $spread: 0, $size: 0, $color: #000 ) {
+  $shadow: photoshop-shadow($angle, $distance, $spread, $size, $color);
+  @return (nth($shadow, 1) nth($shadow, 2) nth($shadow, 3) nth($shadow, 5));
 }
 
 @function photoshop-glow($choke: 0, $size: 0, $color: #fff, $inner: false) {
@@ -54,8 +64,7 @@
 //--------------------------------
 @mixin photoshop-text-shadow ($angle: 0, $distance: 0, $spread: 0, $size: 0, $color: #000) {
   // NOTE: $spread has no effect for text shadows
-  $shadow: photoshop-shadow($angle, $distance, $spread, $size, $color, true);
-  @include text-shadow(nth($shadow, 1) nth($shadow, 2) nth($shadow, 3) nth($shadow, 5));
+  @include text-shadow(photoshop-text-shadow($angle, $distance, $spread, $size, $color));
 }
 
 //--------------------------------

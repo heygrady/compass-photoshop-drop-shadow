@@ -1,22 +1,33 @@
-// This is where you put the contents of the main stylesheet for the user's project.
-// It should import your sass stylesheets and demonstrate how to use them.
-@import "photoshop-drop-shadow";
+@import 'photoshop-drop-shadow';
 
+// Simple shadow
 div.box-shadow {
-  @include photoshop-drop-shadow(90, 1px, 0, 0, #000);
+  @include photoshop-drop-shadow(120, 5px, 0, 5px, rgba(#000, 0.75));
 }
+
+// Inner shadow
 div.inner-box-shadow {
-  @include photoshop-inner-shadow(90, 1px, 0, 0, #000);
+  @include photoshop-inner-shadow(120, 5px, 0, 5px, rgba(#000, 0.75));
 }
+
+// Supporting multiple shadows
 div.multiple-box-shadow {
-  @include photoshop-inner-shadow(90, 1px, 0, 0, #000);
   @include box-shadow(
-    photoshop-shadow(90, 1px, 0, 0, #000),
-    photoshop-shadow(45, 1px, 10%, 5px, #900),
-    photoshop-shadow(120, 6px, 5%, 3px, #090, inset)
+    photoshop-shadow(120, 5px, 0, 5px, rgba(#000, 0.75)),
+    photoshop-shadow(120, 5px, 0, 5px, rgba(#000, 0.75), inset)
   );
 }
+
+// Text Shadow
 h1 {
   // NOTE: $spread has no effect for text shadows
-  @include photoshop-text-shadow(90, 1px, 0, 0, #000);
+  @include photoshop-text-shadow(120, 5px, 0, 5px, rgba(#000, 0.75));
+}
+
+// Multiple Text Shadow
+h2 {
+  @include text-shadow(
+    photoshop-text-shadow(120, 5px, 0, 5px, rgba(#000, 0.75)),
+    photoshop-text-shadow(-60, 5px, 0, 5px, rgba(#300, 0.75))
+  );
 }

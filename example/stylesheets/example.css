@@ -1,0 +1,11 @@
+div.box-shadow { -webkit-box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.75) ; -moz-box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.75) ; box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.75) ; }
+
+div.inner-box-shadow { -webkit-box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.75) inset; -moz-box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.75) inset; box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.75) inset; }
+
+div.multiple-box-shadow { -webkit-box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.75) , 3px 4px 5px 0px rgba(0, 0, 0, 0.75) inset; -moz-box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.75) , 3px 4px 5px 0px rgba(0, 0, 0, 0.75) inset; box-shadow: 3px 4px 5px 0px rgba(0, 0, 0, 0.75) , 3px 4px 5px 0px rgba(0, 0, 0, 0.75) inset; }
+
+h1 { text-shadow: 3px 4px 5px rgba(0, 0, 0, 0.75); }
+
+h2 { text-shadow: 3px 4px 5px rgba(0, 0, 0, 0.75), -3px -4px 5px rgba(51, 0, 0, 0.75); }
+
+div { float: left; background-color: #ccc; height: 100px; width: 100px; padding: 20px; margin: 20px; }

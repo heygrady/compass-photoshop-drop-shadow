@@ -1,0 +1,43 @@
+@import 'photoshop-drop-shadow';
+
+// Simple shadow
+div.box-shadow {
+  @include photoshop-drop-shadow(120, 5px, 0, 5px, rgba(#000, 0.75));
+}
+
+// Inner shadow
+div.inner-box-shadow {
+  @include photoshop-inner-shadow(120, 5px, 0, 5px, rgba(#000, 0.75));
+}
+
+// Supporting multiple shadows
+div.multiple-box-shadow {
+  @include box-shadow(
+    photoshop-shadow(120, 5px, 0, 5px, rgba(#000, 0.75)),
+    photoshop-shadow(120, 5px, 0, 5px, rgba(#000, 0.75), inset)
+  );
+}
+
+// Text Shadow
+h1 {
+  // NOTE: $spread has no effect for text shadows
+  @include photoshop-text-shadow(120, 5px, 0, 5px, rgba(#000, 0.75));
+}
+
+// Multiple Text Shadow
+h2 {
+  @include text-shadow(
+    photoshop-text-shadow(120, 5px, 0, 5px, rgba(#000, 0.75)),
+    photoshop-text-shadow(-60, 5px, 0, 5px, rgba(#300, 0.75))
+  );
+}
+
+// just to make it look better
+div {
+  float: left;
+  background-color: #ccc;
+  height: 100px;
+  width: 100px;
+  padding: 20px;
+  margin: 20px;
+}
