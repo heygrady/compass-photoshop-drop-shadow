@@ -1,6 +1,7 @@
-Compass plugin to make it easier to work with Photoshop Drop Shadows. You can check out the original blog post on [Recreating Photoshop Drop Shadows in CSS3 and Compass](http://heygrady.com/blog/2011/08/06/recreating-photoshop-drop-shadows-in-css3-and-compass/).
+Compass plugin to make it easier to work with Photoshop Drop Shadows. Allows you to take the values directly from the Photoshop style dialog and create an identical shadow in pure CSS. Works for Drop Shadow, Inner Shadow, Drop Shadows on text and has some basic support for Inner and Outer Glow.
 
 - [Original Gist](https://gist.github.com/1039282)
+- [Recreating Photoshop Drop Shadows in CSS3 and Compass](http://heygrady.com/blog/2011/08/06/recreating-photoshop-drop-shadows-in-css3-and-compass/)
 
 ## Installation
 #### Install the Ruby Gem.
@@ -8,7 +9,7 @@ Compass plugin to make it easier to work with Photoshop Drop Shadows. You can ch
 gem install compass-photoshop-drop-shadow
 ```
 
-####Existing Compass Projects
+#### Existing Compass Projects
 You can include it in any existing Compass project by including the plugin in your config.rb file.
 
 ```ruby
